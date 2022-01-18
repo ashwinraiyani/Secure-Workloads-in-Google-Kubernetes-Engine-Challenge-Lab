@@ -1,8 +1,7 @@
-### GSP335 : Secure Workloads in Google Kubernetes Engine: Challenge Lab :-
+### Secure Workloads in Google Kubernetes Engine: Challenge Lab :-
 
 ----------------------------------------------------------------------------------------------------------------------------------------------
 
-Follow on Twitter @techiezilla , Instagram @techiezilla.
 
 
 ### Task - 0 : Download the necessary files :-
