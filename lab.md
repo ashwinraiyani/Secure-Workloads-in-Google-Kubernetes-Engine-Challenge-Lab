@@ -14,29 +14,29 @@ gsutil -m cp gs://cloud-training/gsp335/* .
 ### Task - 1 : Setup Cluster :-
 
 ```yaml
-gcloud container clusters create demo1  --machine-type n1-standard-4 --num-nodes 2 --zone us-central1-c --enable-network-policy
-gcloud container clusters get-credentials demo1 --zone us-central1-c
+gcloud container clusters create security-demo-cluster620  --machine-type n1-standard-4 --num-nodes 2 --zone us-central1-c --enable-network-policy
+gcloud container clusters get-credentials security-demo-cluster620 --zone us-central1-c
 ```
 
 ### Task - 2 : Setup WordPress :-
 
 ```yaml
-gcloud sql instances create wordpress --region=us-central1
-gcloud sql databases create wordpress --instance wordpress
-gcloud sql users create dbpress --instance=wordpress --host=% --password='P@ssword!'
-gcloud sql users create wordpress1 --instance=wordpress --host=% --password='P@ssword!'
+gcloud sql instances create wordpress-db-707 --region=us-central1
+gcloud sql databases create wordpress --instance wordpress-db-707
+gcloud sql users create wordpress --instance=wordpress-db-707 --host=% --password='P@ssword!'
 ```
 
 ```yaml
-gcloud iam service-accounts create sa-wordpress --display-name sa-wordpress
+gcloud iam service-accounts create sa-wordpress-827 --display-name sa-wordpress-827
 ```
 
 ```yaml
-gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT    --role roles/cloudsql.client  --member serviceAccount:sa-wordpress@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com
+gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT    --role roles/cloudsql.client  --member serviceAccount:sa-wordpress-827@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com
 ```
 
 ```yaml
-gcloud iam service-accounts keys create key.json    --iam-account sa-wordpress@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com
+gcloud iam service-accounts keys create key.json    --iam-account sa-wordpress-827@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com
+
 ```
 
 ```yaml
@@ -44,6 +44,7 @@ kubectl create secret generic cloudsql-instance-credentials    --from-file key.j
 kubectl create secret generic cloudsql-db-credentials \
   --from-literal username=wordpress \
   --from-literal password='P@ssword!'
+
 ```
 
 ```yaml
