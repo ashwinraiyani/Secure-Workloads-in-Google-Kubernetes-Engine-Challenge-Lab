@@ -47,11 +47,19 @@ kubectl create secret generic cloudsql-db-credentials \
 ```
 
 ```yaml
-kubectl apply -f volume.yaml
+kubectl create -f volume.yaml
+
+```
+```yaml
+Go to the overview page of your Cloud SQL instance, and copy the Connection name 
 ```
 
 ```yaml
-sed -i s/INSTANCE_CONNECTION_NAME/${GOOGLE_CLOUD_PROJECT}:us-central1:wordpress/g wordpress.yaml
+Click on Open Editor --> Open wordpress.yaml
+```
+
+```yaml
+Open wordpress.yaml with your favorite editor, and replace INSTANCE_CONNECTION_NAME (in line 61) with the Connection name of your Cloud SQL instance.
 kubectl apply -f wordpress.yaml
 ```
 
