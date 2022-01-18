@@ -58,8 +58,10 @@ Go to the overview page of your Cloud SQL instance, and copy the Connection name
 Click on Open Editor --> Open wordpress.yaml
 ```
 
-```yaml
+
 Open wordpress.yaml with your favorite editor, and replace INSTANCE_CONNECTION_NAME (in line 61) with the Connection name of your Cloud SQL instance.
+
+```yaml
 kubectl apply -f wordpress.yaml
 ```
 
@@ -130,40 +132,28 @@ spec:
 ### Task - 5 : Setup Binary Authorization :-
 
 ```yaml
-gcloud services enable \
-  container.googleapis.com \
-  containeranalysis.googleapis.com \
-  binaryauthorization.googleapis.com
-```
+In the Cloud Console, navigate to Security > Binary Authorization.
+Enable the Binary Authorization API.
+On the Binary Authorization page, click on CONFIGURE POLICY.
+Select Disallow all images for the Default rule.
+Scroll down to Images exempt from this policy, click ADD IMAGE PATTERN
+add the four values and change as :-
 
-```yaml
-gcloud container clusters update demo1 --enable-binauthz --zone us-central1-c
-```
+docker.io/library/wordpress:latest
+us.gcr.io/k8s-artifacts-prod/ingress-nginx/*
+gcr.io/cloudsql-docker/*
+quay.io/jetstack/*
 
-```yaml
-gcloud container binauthz policy export > bin-auth-policy.yaml
-```
+save policy
 
-```yaml
-nano bin-auth-policy.yaml
-```
+goto Kubernetes Engine > Clusters.
+Click on the pencil icon for Binary authorization under the Security section
 
-Edit and add the four values and change as :-
-
-```yaml
-- namePattern: docker.io/library/wordpress:latest
-- namePattern: us.gcr.io/k8s-artifacts-prod/ingress-nginx/*
-- namePattern: gcr.io/cloudsql-docker/*
-- namePattern: quay.io/jetstack/*
-defaultAdmissionRule:
- enforcementMode: ENFORCED_BLOCK_AND_AUDIT_LOG
- evaluationMode: ALWAYS_DENY
-globalPolicyEvaluationMode: ENABLE
+Check Enable Binary Authorization in the dialog.
+Click SAVE CHANGES.
 ```
+### wait till cluster get update
 
-```yaml
-gcloud container binauthz policy import bin-auth-policy.yaml
-```
 
 ### Task - 6 : Setup Pod Security Policy :-
 
