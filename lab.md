@@ -83,10 +83,14 @@ kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/relea
 kubectl get svc
 ```
 
+Execute again until external IP comes
+
 Check the service nginx-ingress-controller as an external IP address before continuing to the next step.
 
+in below code change email id and service account name 
+
 ```yaml
-sed -i s/LAB_EMAIL_ADDRESS/sa-wordpress@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com/g issuer.yaml
+sed -i s/student-04-59b075fae8a5@qwiklabs.net/sa-wordpress-827@$GOOGLE_CLOUD_PROJECT.iam.gserviceaccount.com/g issuer.yaml
 kubectl apply -f issuer.yaml
 ```
 
@@ -132,8 +136,8 @@ spec:
 
 ### Task - 5 : Setup Binary Authorization :-
 
-```yaml
-In the Cloud Console, navigate to Security > Binary Authorization.
+
+In the Cloud Console, navigate to ### Security > Binary Authorization.
 Enable the Binary Authorization API.
 On the Binary Authorization page, click on CONFIGURE POLICY.
 Select Disallow all images for the Default rule.
@@ -152,8 +156,8 @@ Click on the pencil icon for Binary authorization under the Security section
 
 Check Enable Binary Authorization in the dialog.
 Click SAVE CHANGES.
-```
-### wait till cluster get update
+
+### wait till cluster get update (5 minute)
 
 
 ### Task - 6 : Setup Pod Security Policy :-
