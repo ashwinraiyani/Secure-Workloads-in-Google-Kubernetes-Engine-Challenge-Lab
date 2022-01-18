@@ -166,6 +166,7 @@ Click SAVE CHANGES.
 kubectl apply -f psp-restrictive.yaml
 kubectl apply -f psp-role.yaml
 kubectl apply -f psp-use.yaml
+kubectl apply -f psp-restrictive.yaml
 ```
 
 ### Congratulations!
